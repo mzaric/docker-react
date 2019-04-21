@@ -1,0 +1,18 @@
+#use an existing image as a base
+FROM node:alpine
+
+#set working dir for my app
+WORKDIR  '/nodeapp'
+
+#copy package.json as it is required for npm install
+COPY ./package.json ./
+
+#Download and install dependencies
+RUN npm install
+
+#copy current files (from mu current working dir) to build container
+#dev environment uses volumes to map to original folder so no need to copy
+#COPY ./ ./
+
+#Tell image what to execute when it starts as a container
+CMD ["npm","run","start"]
